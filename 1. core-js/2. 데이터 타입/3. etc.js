@@ -9,5 +9,5 @@ console.log(logical);
 // logical = "true";
 
 //null
-var banan = "바나나";
+var banana = "바나나";
 banana = null;

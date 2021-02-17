@@ -3,7 +3,7 @@
 var greeting;
 greeting = 'hello';
 greeting = "안녕하세요";
-greeting = `니하오`; // 백틱(``) ES6붙처 도입
+greeting = `니하오`; // 백틱(``) ES6부터 도입
 
 console.log(typeof greeting);
 
