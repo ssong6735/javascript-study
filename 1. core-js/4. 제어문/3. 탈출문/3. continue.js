@@ -8,7 +8,7 @@ for (var i=1; i<11; i++) {
 }
 
 console.log('=================');
-
+/*
 while (true) {
     var n = +prompt('정수를 입력하세요.');
     if (n===0) break;
@@ -17,3 +17,5 @@ while (true) {
 
     alert('메롱메롱~');
 }
+
+*/
