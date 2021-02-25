@@ -31,7 +31,7 @@ function addAll2(...numbers) { // 인수값에 []를 넣고싶지 않을때 사�
 
 
 // n개의 정수의 합을 구하는 함수
-// spread: ES6 배열문법 (... 넣기 => ... 두번은 사용할수 없다.) 
+// spread: ES6 배열(스프레드)문법 (... 넣기 => ... 두번은 사용할수 없다.) 
 function addAll3(name, ...numbers) { // 인수값에 []를 넣고싶지 않을때 사용.
     console.log(`${name}님 안녕~!`);
     var total = 0;
