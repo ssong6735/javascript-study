@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>querySelector.html</title>
+</head>
+<body>
+    
+    <ul id="fruits">
+        <li class="fruit apple">Apple</li>
+        <li class="fruit banana">Banana</li>
+        <li class="fruit grape">Grape</li>
+    </ul>
+
+    <script>
+        // querySelector : 요소 하나만
+        // querySelectorAll : 여러 요소들
+
+        // const $elem = document.querySelector('.banana');
+        // const $elem = document.querySelector('#fruits > li:nth-child(2)');
+        // const $elem = document.querySelector('li[class="fruit banana"]');
+        const $elem = document.querySelector('li.apple + li');
+        $elem.style.color = 'yellow';
+
+        const $elements = document.querySelectorAll('#fruits > li');
+        console.log($elements);
+        for (let $ele of $elements) {
+            $ele.style.background = 'red';
+        }
+
+        // querySelector : 문법이 맞고 해당 요소가 없으면 'null' 반환
+        // querySelectorAll : 문법이 맞고 해당 요소가 없으면 '빈 배열' 반환
+        // 문법이 틀리면 에러가 난다.
+        const $test = document.querySelector('#peach');
+        console.log($test);
+
+    </script>
+
+</body>
+</html>

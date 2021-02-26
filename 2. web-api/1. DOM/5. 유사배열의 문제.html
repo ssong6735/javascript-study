@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유사배열의 문제.html</title>
+
+    <style>
+        ul>li {
+            font-size: 30px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li class="red">Apple</li>
+        <li class="red">Banana</li>
+        <li class="red">Grape</li>
+        <li class="red">Peach</li>
+    </ul>
+
+
+    <script>
+        // 유사배열 NodeList 리턴
+        // const $elements = document.querySelectorAll('.red');
+
+        // 유사배열 HTMLCollection 리턴
+        // 데이터를 실시간으로 변동해버린다.
+        // const $elements = document.getElementsByClassName('red');
+        const $elements = [...document.getElementsByClassName('red')];
+        console.log($elements);
+
+        // 유사배열을 배열처럼 제어할 때는 순수 배열로 변경해서 사용한다.
+        // const realArray = Array.from($elements);
+        const realArray = [...$elements]; // ES6
+        console.log(realArray);
+
+        for (let i=0; i<realArray.length; i++) {
+            realArray[i].className = 'blue';
+        }
+    </script>
+
+
+</body>
+
+</html>

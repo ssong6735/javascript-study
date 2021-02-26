@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>byTagName.html</title>
+</head>
+
+<body>
+
+    <ul id="fruits">
+        <li id="apple">Apple</li>
+        <li id="banana">Banana</li>
+        <li id="grape">Grape</li>
+    </ul>
+
+    <ol>
+        <li>야야야</li>
+        <li>왜왜왜</li>
+    </ol>
+
+    <script>
+        // 유사 배열
+        // key가 인덱스처럼 구성되어 있고 length 프로퍼티가 있음
+        const arr = {
+            0: 'a',
+            1: 'b',
+            2: 'c',
+            length: 3,
+            name: 'ddd',
+            age: 50
+        };
+
+        // ul로 가져오면 ul의 li만 제어가능. 하지만 잘 사용 안함.
+        const $ul = document.getElementById('fruits');
+        const $liArray = $ul.getElementsByTagName('li');
+
+        // const $liArray = document.getElementsByTagName('li');
+
+        console.log($liArray);
+        console.log($liArray[0]);
+        console.log($liArray.length);
+        console.log($liArray.banana);
+
+        for (let $ele of $liArray) {
+            $ele.style.fontStyle = 'italic';
+        }
+
+        for (let i = 0; i < $liArray.length; i++) {
+            $liArray[i].style.color = 'red';
+        }
+        // 단점 : ul의 li만 제어하고 싶지만 ol의 li까지 변경된다.
+    </script>
+
+
+</body>
+
+</html>
