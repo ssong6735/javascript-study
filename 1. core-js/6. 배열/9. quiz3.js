@@ -44,7 +44,7 @@ while (true) {
     if (tvxq.includes(delName)) {
         if (confirm(`${delName}: 정말로 삭제 하시겠습니까?`)) { // confirm : 확인(true), 취소(false)
         tvxq.splice(tvxq.indexOf(delName), 1);
-        alert(`삭제 완료! \n남은 멤버: [${tvxq}]`)
+        alert(`삭제 완료! \n남은 멤버: [${tvxq}]`);
         }
     } else {
         alert(`${delName}은(는) 잘못된 이름입니다.\n 다시 입력해주세요.`);

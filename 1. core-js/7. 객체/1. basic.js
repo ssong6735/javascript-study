@@ -58,7 +58,7 @@ console.log(dog);
 console.log('=============================');
 
 for (var key in cat) {
-    console.log(cat[key]); // cat.key 는 cat.'프로퍼티 문자열' 로 가져온다. 그래서 대가로 사용
+    console.log(cat[key]); // cat.key 는 cat.'프로퍼티 문자열' 로 가져온다. 그래서 대괄호 사용
 }
 
 
