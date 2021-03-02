@@ -36,8 +36,9 @@ console.log(foods);
 */
 
 console.log('====================');
-var input = '짜장면';
-var idx;
+var input = '짬뽕';
+
+var idx = foods.indexOf(input);
 if (idx >= 0) {
     foods.splice(idx, 1);
     console.log(`${input} 삭제 완료!`);
