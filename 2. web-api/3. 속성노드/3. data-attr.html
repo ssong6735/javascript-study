@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data-attr.html</title>
+</head>
+<body>
+    
+    <ul class="users">
+        <li id="1" data-user-id="kim1234" data-role="common">Kim</li>
+        <li id="2" data-user-id="park4321" data-role="admin">Park</li>
+    </ul>
+
+
+    <script>
+        const $users = document.querySelector('.users');
+
+        // 배열 디스트럭쳐링
+        const [$user1, $user2] = [...$users.children];
+
+        console.log($user1.getAttribute('data-role')); // 속성이름을 알경우
+        console.log($user1.dataset); // 속성이름을 모를경우
+        console.log($user1.dataset.role);
+        console.log($user1.dataset.userId);
+
+        $user2.dataset.role = 'anonymous';
+
+        $user2.dataset.userTelNumber = '010-1234-1234';
+        // userTelNumber 를 data-user-tel-number로 자동으로 바꿔서 넣어준다.
+
+
+        // body를 얻는 법
+        const $body = document.body;
+        console.log($body);
+
+        // html 태그를 얻는 법
+        const $html = document.documentElement;
+        console.log($html);
+    </script>
+
+</body>
+</html>
