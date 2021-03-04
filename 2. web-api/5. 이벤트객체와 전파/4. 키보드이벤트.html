@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>키보드이벤트.html</title>
+</head>
+<body>
+
+    <input type="text">
+    <p class="msg"></p>
+
+    <script>
+        const $input = document.querySelector('input[type="text"');
+        const $msg = document.querySelector('.msg');
+
+        $input.addEventListener('keyup', e => {
+            // console.log(e.key);
+            // console.log(e);
+
+            if (e.key === 'Enter') {
+                $msg.textContent = e.target.value;
+                e.target.value = '';
+            } else if (e.key === 'Escape') {
+                $msg.textContent = '';
+            }
+        });
+
+        // input에 텍스트가 입력되고 엔터를 치면
+        // p 태그에 텍스트 내용이 출력되고 input 에 있는 텍스트는 사라짐
+        // input에서 esc를 누르면 p 태그의 글씨가 사라짐
+    </script>
+    
+</body>
+</html>

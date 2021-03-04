@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>addEventListener.html</title>
+</head>
+<body>
+
+    <button id="btn">클릭!</button>
+
+
+    <script>
+        const $btn = document.getElementById('btn');
+
+        function hello() {
+            alert('hello!');
+        }
+
+        // $이벤트 타겟.addEventListener('이벤트 타입(반드시 문자열)', 이벤트 핸들러(함수이름));
+        $btn.addEventListener('click', hello);
+        $btn.addEventListener('click', function(){
+            alert('world!');
+        });
+        $btn.addEventListener('click', () => {
+            alert('bye!');
+        });
+
+
+        // 이벤트 핸들러 제거 : 익명함수는 이름이 없기때문에 제거할 수 없다.
+        $btn.removeEventListener('click', hello);
+
+
+    </script>
+    
+</body>
+</html>
