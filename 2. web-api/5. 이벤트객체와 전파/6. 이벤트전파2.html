@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트전파2.html</title>
+
     <style>
         #fruits {
             display: flex;
@@ -38,8 +39,7 @@
     <br>
 
     # 새로운 과일 추가: <input type="text" class="text-box">
-    <button class="add">추가</button>
-
+                        <button id="add">추가</button>
 
     <script>
         const $fruits = document.getElementById('fruits');
@@ -49,7 +49,6 @@
 
         // 이벤트 핸들러 함수
         function activate(e) {
-            // $li.classList.add('active');
             for (let $target of $liList) {
                 /*
                 toggle 메서드의 두번째 인수로 논리값을 전달할 수 있는데,
@@ -58,22 +57,22 @@
                 */
                 $target.classList.toggle('active', $target === e.target);
                 // $target: 꺼내오는 li, e.target: 선택한 li
-
-                $msg.textContent = e.target.id;
-                // $msg.textContent = e.target.textContent;
-                // $msg.textContent = e.target.getAttribute('id');
             }
+            // console.log(e);
+            $msg.textContent = e.target.id;
+            // $msg.textContent = e.target.textContent;
+            // $msg.textContent = e.target.getAttribute('id');
         }
 
         for (let $li of $liList) {
             $li.addEventListener('click', activate);
         }
 
-        //동적으로 과일 추가 기능
+        // 동적으로 과일 추가 기능
         const $btn = document.getElementById('add');
         const $textBox = document.querySelector('.text-box');
 
-        //버튼에 이벤트 등록
+        // 버튼에 이벤트 등록
         $btn.addEventListener('click', e => {
             const $newLi = document.createElement('li'); // <li></li>
             $newLi.textContent = $textBox.value;            // <li>Orange</li>
@@ -81,7 +80,7 @@
             $fruits.appendChild($newLi);
             $textBox.value = '';
 
-            //추가된 li에 이벤트 부여
+            // 추가된 li에 이벤트 부여
             $liList.push($newLi);
             $newLi.addEventListener('click', activate);
         });
