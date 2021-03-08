@@ -1,0 +1,124 @@
+html {
+    font-size: 16px;
+    /* rem 제어용 폰트지정 */
+}
+
+/* reset */
+a {
+    color: inherit;
+    text-decoration: underline;
+}
+input, button {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+/* custom */
+/* layout */
+.wrapper {
+    background: #e9ecef;
+    height: 100vh;
+}
+
+section.todo-template {
+    width: 512px;
+    margin: 0 auto;
+    padding: 6rem 0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+section.todo-template .app-title {
+    background: #22b8cf;
+    color: #fff;
+    height: 4rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.todo-template .content {
+    background: #fff;
+}
+
+section.todo-template .content .todo-insert {
+    display: flex;
+    background: #495057;    
+}
+
+section.todo-template .content .todo-insert input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: #fff;
+}
+
+section.todo-template .content .todo-insert input::placeholder {
+    color: #dee2e6;
+    /* input::placeholder 익스플로러는 적용안됨. 나머지 브라우저만 적용 */
+}
+
+section.todo-template .content .todo-insert button {
+    background: #868e96;
+    color: #fff;
+    padding: 0 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.todo-template .content .todo-insert button:hover {
+    background: #adb5bd;
+}
+
+section.todo-template .content .todo-list {
+    min-height: 320px;
+    max-height: 520px;
+    overflow: auto;
+}
+
+section.todo-template .content .todo-list .todo-list-item {
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+}
+
+section.todo-template .content .todo-list .todo-list-item:nth-child(even) {
+    background: #f8f9fa;
+}
+
+section.todo-template .content .todo-list .todo-list-item .checkbox {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+section.todo-template .content .todo-list .todo-list-item .checkbox input {
+    transform: scale(1.5); /* checkbox의 크기 키우기 */
+}
+
+section.todo-template .content .todo-list .todo-list-item .checkbox .text {
+    flex: 1;
+    margin-left: 0.5rem;
+}
+
+section.todo-template .content .todo-list .todo-list-item div[class] {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+section.todo-template .content .todo-list .todo-list-item .modify {
+    color: green;
+    margin-right: 0.6rem;
+}
+
+section.todo-template .content .todo-list .todo-list-item .remove {
+    color: red;
+}
