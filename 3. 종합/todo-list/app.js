@@ -138,8 +138,13 @@ function changeCheckState($label) {
 // 할 일 삭제 처리 함수 정의
 function removeToDoData($delTarget) {
     //1. 삭제를 하려면 ul에서 li를 지워야 함.
-    //2. 지우려면 ul 노드랑 삭제대상 li의 노드를 받아야 함.    
-    document.querySelector('.todo-list').removeChild($delTarget);
+    //2. 지우려면 ul 노드랑 삭제대상 li의 노드를 받아야 함. 
+    $delTarget.classList.add('delMoving');
+    
+    // 비동기 실행을 위한 함수
+    setTimeout(() => {
+        document.querySelector('.todo-list').removeChild($delTarget);
+    }, 1500); // 1500 = 1.5초 /ms로 적어야 함
 
     const index = findIndexByDataId(+$delTarget.dataset.id);
     if (index !== null) {
