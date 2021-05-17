@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <title>HTTP 비동기 요청과 응답</title>
+</head>
+
+<body>
+
+    <button id="load-btn">게시물 불러오기</button>
+
+    <ul class="content">
+
+    </ul>
+
+    <script>
+        document.getElementById('load-btn').addEventListener('click', e => {
+            // HTTP 비동기 요청을 서버로 보내는 방법
+
+            // 1. XMLHttpRequest 객체를 생성
+            const xhr = new XMLHttpRequest();
+
+            // 2. http 요청 초기 설정 (요청방식, 요청 URL)
+            xhr.open('GET', 'http://localhost:5000/article');
+
+            // 3. http 요청 전송
+            xhr.send();
+            console.log(xhr);
+
+            // 4. 응답 정보체크
+            xhr.onload = e => {
+                if (xhr.status === 200) {
+                    console.log(xhr.response);
+                    makeResultData(xhr.response);
+                } else {
+                    console.error('통신 실패!');
+                }
+            };
+        });
+
+        // 응답 정보로 DOM 을 조작하는 함수
+        function makeResultData(articles) {
+            /*
+                서버가 응답한 데이터는 javascript 객체가 아니라
+                json 포맷의 데이터 입니다.
+                따라서 자바스크립트 문법을 사용할 수 없습니다.
+                json 을 자바스크립트로 변환해서 써야 합니다.
+
+                # json -> javascript : JSON.parse() (서버 -> 클라이언트 로 받을때)
+                # javascript -> json : JSON.stringify() (클라이언트 -> 서버 로 보낼때)
+            */
+
+            // JSON 을 JS 객체로 변환
+            const articleList = JSON.parse(articles);
+            //const firstArticle = articles[0];
+
+            //console.log('첫번째 게시물: ', firstArticle);
+
+            const $ul = document.querySelector('.content');
+            for (let board of articleList) {
+                const {id, title, writer} = board;
+                const $li = document.createElement('li');
+                $li.textContent = `# 글번호: ${id}, 제목: ${title}, 작성자: ${writer}`;
+
+                $ul.appendChild($li);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
