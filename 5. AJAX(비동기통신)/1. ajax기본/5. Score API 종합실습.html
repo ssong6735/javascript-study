@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>score api 종합실습</title>
+
+    <style>
+        .del-btn {
+            width: 10px;
+            height: 10px;
+            background: red;
+            color: white;
+            border-radius: 5px;
+            margin-left: 5px;
+            text-decoration: none;
+            font-size: 0.7em;
+            padding: 6px;
+        }
+
+        .del-btn:hover {
+            background: orangered;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .score-list li:first-child {
+            font-size: 1.2em;
+            color: orange;
+            font-weight: 700;
+            border-bottom: 1px solid orange;
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>시험 점수 등록</h1>
+    <div class="register">
+        <label>
+            # 이름: <input type="text" name="name">
+        </label>
+        <label>
+            # 국어: <input type="text" name="kor">
+        </label>
+        <label>
+            # 영어: <input type="text" name="eng">
+        </label>
+        <label>
+            # 수학: <input type="text" name="math">
+        </label>
+        <button id="insert">확인</button>
+        <button id="load-btn">게시물 불러오기</button>
+    </div>
+
+    <hr>
+
+    <ul class="score-list">
+
+        <li>총 학생 수: <span class="stu-count"></span>명</li>
+
+        <!-- <c:forEach var="score" items="${scoreList}">
+            <li># 학번: ${score.stuNum}, 이름: <a href="/score/detail?stuNum=${score.stuNum}">${score.name}</a>, 국어: ${score.kor}점, 영어: ${score.eng}점, 수학: ${score.math}점, 총점: ${score.total}점, 평균: ${score.average}점
+                <a class="del-btn" href="/score/delete?stuNum=${score.stuNum}">삭제</a>
+            </li>            
+        </c:forEach> -->
+
+    </ul>
+
+
+
+
+    <script>
+        document.getElementById('load-btn').addEventListener('click', e => {
+            // HTTP 비동기 요청을 서버로 보내는 방법
+            // 1. XMLHttpRequest 객체를 생성
+            const xhr = new XMLHttpRequest();
+            // 2. http 요청 초기 설정 (요청방식, 요청 URL)
+            xhr.open('GET', 'http://localhost:8181/api/score');
+            // 3. http 요청 전송
+            xhr.send();
+            console.log(xhr);
+            // 4. 응답 정보체크
+            xhr.onload = e => {
+                if (xhr.status === 200) {
+                    console.log(xhr.response);
+                    makeResultData(xhr.response);
+                } else {
+                    console.error('통신 실패!');
+                }
+            };
+        });
+
+        // 응답 정보로 DOM 을 조작하는 함수
+        function makeResultData(scores) {
+            // JSON 을 JS 객체로 변환
+            const scoreList = JSON.parse(scores);
+            // const firstScore = scores[0];
+            // console.log('첫번째 게시물: ', firstScore);            
+            // console.log(scoreList);
+
+            const $ul = document.querySelector('.score-list');
+            for (let score of scoreList) {
+                const {
+                    stuNum,
+                    name,
+                    kor,
+                    eng,
+                    math,
+                    total,
+                    average
+                } = score;
+                const $li = document.createElement('li');
+                $li.textContent =
+                    `# 학번: ${stuNum}, 이름: ${name}, 국어: ${kor}점, 영어: ${eng}점, 수학: ${math}점, 총점: ${total}점, 평균: ${average}점`;
+                $li.innerHTML += `<a class="del-btn" href="#">삭제</a>`;
+
+                $ul.appendChild($li);
+            }
+
+            // 총 학생수 처리
+            document.querySelector('.stu-count').textContent = scoreList.length;
+        }
+
+
+        // insert 버튼 클릭 이벤트
+        document.getElementById('insert').onclick = e => {
+            e.preventDefault();
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://localhost:8181/api/score');
+
+            // post 요청은 서버로 전송할 데이터가 필요하다.
+            // 현재 비동기 요청이므로 서버로 보내는 데이터의 형식도 당연히 JSON 이어야 한다.
+            const newData = {
+                name: document.querySelector('input[name=name]').value,
+                kor: document.querySelector('input[name=kor]').value,
+                eng: document.querySelector('input[name=eng]').value,
+                math: document.querySelector('input[name=math]').value
+            };
+
+            // 전송할 데이터가 무슨 형태인지를 요청 헤더에 지정
+            xhr.setRequestHeader('content-type', 'application/json');
+
+            // 전송할 데이터를 json 으로 변환
+            const newJsonData = JSON.stringify(newData);
+
+            // 서버에 요청 전송
+            xhr.send(newJsonData);
+
+            xhr.onload = e => {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    alert('입력 성공!');
+                } else {
+                    alert('입력 실패!');
+                }
+            };
+        };
+
+
+        // del-btn 클릭 이벤트
+        const $list = document.querySelector('.score-list');
+
+        $list.addEventListener('click', e => {
+            console.log('ul에 클릭 이벤트 발생!');
+            console.log('이벤트 핸들러가 붙은 타겟: ', e.currentTarget);
+            console.log('실제 이벤트가 발생한 요소: ', e.target);
+        });
+        
+
+        // document.getElementById('del-btn').onclick = e => {
+        //     e.preventDefault();
+
+        //     const xhr = new XMLHttpRequest();
+        //     const stuNum = document.querySelector('[name=stuNum]').value;
+        //     xhr.open('DELETE', 'http://localhost:8181/api/score' + stuNum);
+        //     xhr.send();
+
+        //     xhr.onload = e => {
+        //         if (xhr.status === 200) {
+        //             alert('삭제 성공!');
+        //         } else {
+        //             alert('삭제 실패!');
+        //         }
+        //     };
+        // };
+    </script>
+
+
+</body>
+
+</html>
